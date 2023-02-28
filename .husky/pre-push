@@ -1,0 +1,16 @@
+#!/bin/bash
+# Prevents force-pushing to master
+
+echo -e "Вжух-вжух и стартанули..."
+
+BRANCH=`git rev-parse --abbrev-ref HEAD`
+PROTECTED_BRANCHES="^(master|dev)"
+
+if [[ "$BRANCH" =~ $PROTECTED_BRANCHES ]]
+then
+  echo -e "\n🚫 Ветка - $BRANCH, защищена, создайте ответвление из текущей и используйте ПР ." && exit 1
+fi
+
+echo -e "Вжух-вжух и запушились..."
+
+exit 0

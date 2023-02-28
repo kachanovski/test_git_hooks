@@ -4,7 +4,7 @@
 echo -e "Вжух-вжух и стартанули..."
 
 BRANCH=`git rev-parse --abbrev-ref HEAD`
-PROTECTED_BRANCHES="^(master|dev)"
+PROTECTED_BRANCHES="^(main|dev)"
 
 if [[ "$BRANCH" =~ $PROTECTED_BRANCHES ]]
 then

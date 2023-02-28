@@ -1,0 +1,21 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+
+
+echo -e "ну погнали..."
+
+BRANCH=`git rev-parse --abbrev-ref HEAD`
+PROTECTED_BRANCHES="^(main|dev)"
+
+if [[ "$BRANCH" =~ $PROTECTED_BRANCHES ]]
+then
+  echo -e "\n🚫 Ветка - $BRANCH, защищена, создайте ответвление из текущей и используйте ПР ."
+  exit 1
+fi
+
+yarn pretty-quick --staged && yarn tsc && yarn format:fix && yarn lint
+
+echo -e "Вжух-вжух и закомитились..."
+
+exit 0
